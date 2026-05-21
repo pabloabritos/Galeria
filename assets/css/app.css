@@ -114,7 +114,7 @@ button {
 .brand-mark {
   display: grid;
   width: 96px;
-  height: 52px;
+  height: 96px;
   place-items: center;
   padding: 5px;
   border-radius: var(--radius);
