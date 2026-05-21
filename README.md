@@ -1,4 +1,4 @@
-# Galeria Live
+# Galeria
 
 Aplicacion web responsive para un canal de YouTube con programas, vivos, shorts, creadores, calendario editorial y sponsors.
 
