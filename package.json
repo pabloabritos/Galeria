@@ -6,8 +6,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js",
-    "check": "node --check server.js && node --check assets/js/app.js"
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check src/config.js && node --check src/staticHandler.js && node --check public/assets/js/app.js"
   },
   "engines": {
     "node": ">=18"
