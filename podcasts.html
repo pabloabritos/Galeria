@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Galeria Live | Podcasts</title>
+    <link rel="stylesheet" href="assets/css/app.css" />
+  </head>
+  <body data-theme="dark" data-page="podcasts">
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html"><span class="brand-mark">G</span><span><strong>Galeria Live</strong><small data-i18n="brandLine">Canal, creadores y comunidad</small></span></a>
+        <button class="menu-button" type="button" data-menu-toggle>Menu</button>
+        <nav class="main-nav" data-main-nav><a href="index.html" data-nav="home" data-i18n="navHome">Home</a><a href="programas.html" data-nav="programs" data-i18n="navPrograms">Programas</a><a href="vivo.html" data-nav="live" data-i18n="navLive">En vivo</a><a href="calendario.html" data-nav="calendar" data-i18n="navCalendar">Calendario</a><a href="creadores.html" data-nav="creators" data-i18n="navCreators">Creadores</a><a href="podcasts.html" data-nav="podcasts" data-i18n="navPodcasts">Podcasts</a><a href="musica.html" data-nav="music" data-i18n="navMusic">Musica</a><a href="sponsors.html" data-nav="support" data-i18n="navSupport">Sponsors</a><a href="sobre.html" data-nav="about" data-i18n="navAbout">Sobre nosotros</a></nav>
+        <div class="utility-bar"><label class="search-wrap"><span>⌕</span><input type="search" data-site-search data-i18n-placeholder="search" placeholder="Buscar programa, short o creador" /></label><button class="icon-button" type="button" data-language-toggle>ES</button><button class="icon-button" type="button" data-theme-toggle>◐</button><a class="login-button" href="creadores.html" data-i18n="login">Entrar</a></div>
+      </header>
+
+      <main>
+        <section class="page-hero compact">
+          <p class="eyebrow" data-i18n="podcastsEyebrow">Podcasts</p>
+          <h1 data-i18n="podcastsTitle">Playlists de podcasts de Spotify dentro del universo del canal.</h1>
+          <p data-i18n="podcastsText">Una pantalla para alojar conversaciones largas, especiales de audio y playlists curatoriales vinculadas a cada programa.</p>
+        </section>
+
+        <section class="embed-grid" aria-label="Playlists de podcasts de Spotify">
+          <article class="spotify-card" data-search="backstage podcast entrevistas creadores spotify">
+            <div class="embed-heading">
+              <span>Podcast</span>
+              <h2>Backstage Talks</h2>
+              <p>Conversaciones extendidas con creadores, invitados y equipo editorial.</p>
+            </div>
+            <iframe
+              title="Playlist Spotify Backstage Talks"
+              src="https://open.spotify.com/embed/playlist/37i9dQZF1DX0XUsuxWHRQd?utm_source=generator"
+              width="100%"
+              height="352"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
+          </article>
+
+          <article class="spotify-card" data-search="mesa abierta podcast actualidad vivo spotify">
+            <div class="embed-heading">
+              <span>Podcast</span>
+              <h2>Mesa Abierta Audio</h2>
+              <p>Versiones de audio y playlists tematicas nacidas de los directos.</p>
+            </div>
+            <iframe
+              title="Playlist Spotify Mesa Abierta Audio"
+              src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4WYpdgoIcn6?utm_source=generator"
+              width="100%"
+              height="352"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
+          </article>
+        </section>
+
+        <section class="content-section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Curadoria</p>
+              <h2>Espacios listos para nuevos feeds</h2>
+            </div>
+          </div>
+          <div class="signal-grid">
+            <article class="signal-card"><span>Spotify</span><strong>Embed por playlist</strong><p>Reemplaza el `src` del iframe con el enlace embed real de Spotify.</p></article>
+            <article class="signal-card"><span>Programas</span><strong>Audio por show</strong><p>Cada programa puede tener su playlist de podcast propia.</p></article>
+            <article class="signal-card"><span>Busqueda</span><strong>Contenido encontrable</strong><p>Las tarjetas ya participan del buscador de la app.</p></article>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
