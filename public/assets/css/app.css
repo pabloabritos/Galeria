@@ -671,14 +671,15 @@ main {
   overflow: hidden;
 }
 
-/* ── Video de la semana — grid de 3 columnas ─────────────────────────────── */
-/* Activa la columna del medio solo cuando la tarjeta es visible */
-.home-hero-layout.show-video-semana:has(aside:not([hidden])) {
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px) minmax(260px, 340px);
-}
+/* ── Video de la semana — desktop: 3 columnas, mobile: 2 columnas ─────────── */
+@media (min-width: 821px) {
+  .home-hero-layout.show-video-semana:has(aside:not([hidden])) {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 260px) minmax(260px, 340px);
+  }
 
-.home-hero-layout.show-video-semana:not(:has(aside:not([hidden]))) {
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+  .home-hero-layout.show-video-semana:not(:has(aside:not([hidden]))) {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+  }
 }
 
 .video-semana-card {
@@ -1377,18 +1378,14 @@ textarea {
     max-width: 100%;
   }
 
-  /* Video semana + banner: lado a lado bajo el player en mobile */
-  .home-hero-layout.show-video-semana:has(aside:not([hidden])) {
+  /* Video semana: 2 columnas iguales bajo el player, sin :has() */
+  .home-hero-layout.show-video-semana {
     grid-template-columns: 1fr 1fr;
     align-items: start;
   }
 
-  .home-hero-layout.show-video-semana:has(aside:not([hidden])) .player-panel {
+  .home-hero-layout.show-video-semana .player-panel {
     grid-column: 1 / -1;
-  }
-
-  .home-hero-layout.show-video-semana:not(:has(aside:not([hidden]))) {
-    grid-template-columns: 1fr;
   }
 
   /* Banner vertical compacto en mobile (columna angosta) */
