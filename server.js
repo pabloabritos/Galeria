@@ -1360,7 +1360,7 @@ const server = http.createServer(async (req, res) => {
         const semanaResult = {
           videoId:     topVideo.id.videoId,
           title:       topVideo.snippet.title,
-          thumbnail:   topVideo.snippet.thumbnails.medium?.url || topVideo.snippet.thumbnails.default?.url,
+          thumbnail:   topVideo.snippet.thumbnails.maxres?.url || topVideo.snippet.thumbnails.standard?.url || topVideo.snippet.thumbnails.high?.url || topVideo.snippet.thumbnails.medium?.url,
           views:       formatNumber(topVideo.viewCount),
           programa,
           publishedAt: topVideo.snippet.publishedAt
