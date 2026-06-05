@@ -688,12 +688,17 @@ main {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .video-semana-card a {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   text-decoration: none;
   color: inherit;
+  min-height: 0;
 }
 
 .video-semana-card .eyebrow {
@@ -703,7 +708,8 @@ main {
 
 .video-semana-thumb {
   position: relative;
-  aspect-ratio: 16 / 9;
+  flex: 1;
+  min-height: 120px;
   overflow: hidden;
   background: #000;
 }
