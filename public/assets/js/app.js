@@ -302,6 +302,18 @@ function bindInteractions() {
     button.addEventListener("click", () => body.classList.toggle("nav-open"));
   });
 
+  // Cierra el nav al tocar fuera (backdrop) en mobile
+  document.addEventListener("click", (e) => {
+    if (!body.classList.contains("nav-open")) return;
+    if (e.target.closest(".main-nav") || e.target.closest("[data-menu-toggle]")) return;
+    body.classList.remove("nav-open");
+  });
+
+  // Cierra el nav al elegir una opción del menú en mobile
+  document.querySelectorAll(".main-nav a").forEach((link) => {
+    link.addEventListener("click", () => body.classList.remove("nav-open"));
+  });
+
   document.querySelectorAll("[data-language-toggle]").forEach((button) => {
     button.addEventListener("click", () => applyLanguage(body.dataset.lang === "es" ? "en" : "es"));
   });

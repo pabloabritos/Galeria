@@ -1385,45 +1385,76 @@ textarea {
     padding-inline: 12px;
   }
 
+  /* ── Topbar compacta en mobile ── */
+  .topbar {
+    gap: 8px;
+    min-height: 52px;
+    padding: 6px 0 6px;
+    flex-wrap: nowrap;
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand small {
+    display: none;
+  }
+
   .menu-button {
     display: inline-flex;
     align-items: center;
+    flex-shrink: 0;
   }
 
-  .topbar,
   .utility-bar {
-    align-items: stretch;
-  }
-
-  .topbar {
-    gap: 10px;
+    display: none;
   }
 
   .brand {
     margin-right: auto;
   }
 
+  /* ── Nav como overlay flotante ── */
   .main-nav {
     display: none;
-    order: 4;
+    position: fixed;
+    top: 52px;
+    left: 0;
+    right: 0;
+    z-index: 19;
     flex-direction: column;
     align-items: stretch;
-    overflow: visible;
+    background: var(--bg, #0a0a0a);
+    border-bottom: 1px solid var(--line);
+    padding: 8px 0 12px;
+    overflow-y: auto;
+    max-height: calc(100svh - 52px);
+  }
+
+  .main-nav a {
+    padding: 13px 20px;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .main-nav a:last-child {
+    border-bottom: none;
   }
 
   body.nav-open .main-nav {
     display: flex;
   }
 
-  .utility-bar {
-    order: 5;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 42px 42px minmax(84px, auto);
-  }
-
-  .search-wrap {
-    width: 100%;
+  /* Backdrop semitransparente detrás del menú */
+  body.nav-open::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    top: 52px;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 18;
   }
 
   .live-hero .hero-copy,
