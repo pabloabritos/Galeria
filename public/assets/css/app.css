@@ -1382,7 +1382,7 @@ textarea {
   /* Video semana: 2 columnas iguales — !important para ganarle a :has() */
   .home-hero-layout.show-video-semana {
     grid-template-columns: 1fr 1fr !important;
-    align-items: start;
+    align-items: stretch;
   }
 
   .home-hero-layout.show-video-semana .player-panel {
