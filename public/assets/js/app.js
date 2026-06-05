@@ -7,7 +7,7 @@ const translations = {
     navCalendar: "Calendario",
     navCreators: "Creadores",
     navPodcasts: "Podcasts",
-    navMusic: "Musica",
+    navMusic: "Música",
     navSupport: "Sponsors",
     navAbout: "Sobre nosotros",
     search: "Buscar programa, short o creador",
@@ -15,9 +15,9 @@ const translations = {
     menu: "Menu",
     like: "Me gusta",
     liked: "Te gusta",
-    latest: "Ultimo estreno del canal",
+    latest: "Último estreno del canal",
     homeTitle: "Galería es el punto de encuentro para comunicarnos.",
-    homeText: "Dos programas, contenidos del canal, vivos, podcasts, musica y comunidad reunidos en una misma experiencia.",
+    homeText: "Dos programas, contenidos del canal, vivos, podcasts, música y comunidad reunidos en una misma experiencia.",
     watchNow: "Ver ahora",
     creatorAccess: "Acceso creadores",
     premiere: "Estreno",
@@ -37,12 +37,12 @@ const translations = {
     playlists: "Playlists del canal",
     chooseShow: "Elegir programa favorito",
     seeSchedule: "Ver agenda",
-    programsTitle: "El Enmascarado y La Posta, reunidos por playlist.",
-    programsText: "Cada tarjeta abre la playlist del programa, sus ultimos episodios y estadisticas publicas.",
+    programsTitle: "Encontrá tus programas favoritos agrupados por playlist.",
+    programsText: "Elegí el programa para ver sus últimos episodios y estadísticas públicas.",
     podcastsEyebrow: "Podcasts",
     podcastsTitle: "Playlists de podcasts de Spotify dentro del universo del canal.",
     podcastsText: "Una pantalla para alojar conversaciones largas, especiales de audio y playlists curatoriales vinculadas a cada programa.",
-    musicEyebrow: "Musica",
+    musicEyebrow: "Música",
     musicTitle: "Playlists musicales de Spotify para acompañar el canal.",
     musicText: "Una seccion para playlists oficiales, selecciones de creadores, musica de programas y curadurias para la comunidad.",
     calendarEyebrow: "Agenda",
@@ -287,8 +287,10 @@ function applySearchAndFilter() {
   const searchableItems = document.querySelectorAll("[data-search]");
 
   searchableItems.forEach((item) => {
-    const category = item.dataset.category;
-    const matchesFilter = currentFilter === "all" || !category || category === currentFilter;
+    const category = item.dataset.category || "";
+    // NUEVO: Ahora soporta múltiples categorías separadas por espacios
+    const matchesFilter = currentFilter === "all" || category.split(" ").includes(currentFilter);
+    
     const haystack = `${item.dataset.search || ""} ${item.textContent}`.toLowerCase();
     const matchesSearch = !query || haystack.includes(query);
     item.classList.toggle("is-hidden", !matchesFilter || !matchesSearch);
@@ -348,3 +350,8 @@ applyLanguage(storedLanguage);
 setActiveNav();
 bindInteractions();
 applySearchAndFilter();
+
+// Exponer para que site-config.js pueda parchear las traducciones con overrides del admin
+// y para que el cambio de idioma siempre use los textos editados
+window.galTranslations  = translations;
+window.galApplyLanguage = applyLanguage;

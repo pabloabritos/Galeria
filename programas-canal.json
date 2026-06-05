@@ -1,0 +1,17 @@
+[
+  {
+    "id": "35a8d70788da",
+    "nombre": "La Posta",
+    "logoUrl": "https://i.ibb.co/5xMYfnCK/LA-POSTA-LOGO.jpg",
+    "instagram": "lapostamundial"
+  },
+  {
+    "id": "2c415b5f34da",
+    "nombre": "El enmascarado",
+    "logoUrl": "https://i.ibb.co/ch4J7ppT/logo-el-enmascarado.png",
+    "instagram": "galeria.canal",
+    "cafecito": "galeriacanal",
+    "mercadopago": "link.mercadopago.com.ar/galeriaprueba",
+    "aliasMP": "elmedanoestudio.mp"
+  }
+]

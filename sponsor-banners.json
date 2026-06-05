@@ -1,0 +1,28 @@
+[
+  {
+    "id": "49afff77b2cfd86f",
+    "title": "Consultorios Profesionales",
+    "body": "Conoce nuestros consultorios ubicados en el centro de Córdoba.",
+    "sponsor": "Sintagma",
+    "imageUrl": "https://i.ibb.co/rfMNGbB9/1.png",
+    "linkUrl": "https://www.instagram.com/sintagma.consultorios.cordoba/",
+    "placement": "global",
+    "active": true,
+    "startsAt": "2026-06-03T19:21:10.025Z",
+    "endsAt": "2026-07-03T19:21:10.025Z",
+    "durationDays": 30
+  },
+  {
+    "id": "66fa11fb133525c6",
+    "title": "Sponsor Premium",
+    "body": "Estudio de producción audiovisual y streaming\nSoluciones creativas.\nCentro de Córdoba.",
+    "sponsor": "El Médano Estudio",
+    "imageUrl": "https://i.ibb.co/M5GdX6fV/Post-prueba-pagina-El-Medano-sponsor.jpg",
+    "linkUrl": "https://www.instagram.com/elmedanoestudio/",
+    "placement": "home",
+    "active": true,
+    "startsAt": "2026-06-03T15:06:29.907Z",
+    "endsAt": "2026-07-03T15:06:29.907Z",
+    "durationDays": 30
+  }
+]

@@ -9,6 +9,7 @@
   </head>
   <body data-theme="dark" data-page="home">
     <div class="site-shell">
+      
       <header class="topbar">
         <a class="brand" href="index.html" aria-label="Galeria inicio">
           <span class="brand-mark"><img src="assets/img/galeria-logo.png" alt="Galeria" /></span>
@@ -26,7 +27,9 @@
           <a href="vivo.html" data-nav="live" data-i18n="navLive">En vivo</a>
           <a href="calendario.html" data-nav="calendar" data-i18n="navCalendar">Calendario</a>
           <a href="creadores.html" data-nav="creators" data-i18n="navCreators">Creadores</a>
-          <a href="podcasts.html" data-nav="podcasts" data-i18n="navPodcasts">Podcasts</a><a href="musica.html" data-nav="music" data-i18n="navMusic">Musica</a><a href="sponsors.html" data-nav="support" data-i18n="navSupport">Sponsors</a>
+          <a href="podcasts.html" data-nav="podcasts" data-i18n="navPodcasts">Podcasts</a>
+          <a href="musica.html" data-nav="music" data-i18n="navMusic">Musica</a>
+          <a href="sponsors.html" data-nav="support" data-i18n="navSupport">Sponsors</a>
           <a href="sobre.html" data-nav="about" data-i18n="navAbout">Sobre nosotros</a>
         </nav>
 
@@ -42,61 +45,83 @@
       </header>
 
       <main>
-        <section class="hero live-hero">
-          <div class="hero-copy">
-            <p class="eyebrow" data-i18n="latest">Ultimo estreno del canal</p>
-            <h1 data-i18n="homeTitle">Galería es el punto de encuentro para comunicarnos.</h1>
-            <p data-i18n="homeText">Dos programas, contenidos del canal, vivos, podcasts, musica y comunidad reunidos en una misma experiencia.</p>
-            <div class="hero-actions">
-              <a class="primary-action" href="programa.html" data-i18n="watchNow">Ver ahora</a>
-              <a class="secondary-action" href="creadores.html" data-i18n="creatorAccess">Acceso creadores</a>
-            </div>
-          </div>
 
+        <div class="home-hero-layout">
           <section class="player-panel" aria-label="Reproductor central">
-            <div class="player-frame">
-              <div class="broadcast-art">
-                <span class="play-glyph" aria-hidden="true">▶</span>
-                <div class="live-chip" data-i18n="premiere">Estreno</div>
-                <div class="wave-lines" aria-hidden="true"></div>
+              <div class="player-frame" id="hero-video-container">
+                  <div id="hero-video">
+                      <p style="color:#aaa; text-align:center; padding:100px 20px;">Cargando último estreno...</p>
+                  </div>
+                  <div class="player-meta">
+                      <div id="hero-meta">
+                          <p id="hero-status">Último estreno</p>
+                          <h2 id="hero-title">Cargando título...</h2>
+                      </div>
+                  </div>
               </div>
-              <div class="player-meta">
-                <div>
-                  <p data-i18n="nowPlaying">Reproduciendo</p>
-                  <h2>El Enmascarado: ultimo episodio</h2>
-                </div>
-                <div class="player-actions">
-                  <button class="small-command" type="button" data-like-button data-i18n="like">Me gusta</button>
-                  <button class="small-command" type="button" data-share-button data-i18n="share">Compartir</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="content-tabs" role="tablist" aria-label="Tipo de contenido">
-              <button class="content-tab is-active" type="button" data-filter="all" data-i18n="all">Todo</button>
-              <button class="content-tab" type="button" data-filter="uploaded" data-i18n="uploaded">Subidos</button>
-              <button class="content-tab" type="button" data-filter="live" data-i18n="live">En vivo</button>
-              <button class="content-tab" type="button" data-filter="shorts" data-i18n="shorts">Shorts</button>
-            </div>
           </section>
+
+          <aside class="sponsor-banner-slot" data-banner-slot="home-vertical" aria-label="Publicidad" hidden></aside>
+        </div>
+
+        <section class="metric-grid wide" id="global-channel-metrics" style="margin-top: 40px;">
+          <span>
+            <strong id="stat-subs">--</strong>
+            <small data-i18n="statSubs">suscriptores</small>
+          </span>
+          <span>
+            <strong id="stat-views">--</strong>
+            <small data-i18n="statViews">reproducciones totales</small>
+          </span>
+          <span>
+            <strong id="stat-hours">--</strong>
+            <small data-i18n="statHours">horas de visualización (mes)</small>
+          </span>
+          <span>
+            <strong id="stat-videos">--</strong>
+            <small data-i18n="statVideos">videos publicados</small>
+          </span>
+        </section>
+
+        <section class="sponsor-banner-slot" data-banner-slot="home" hidden></section>
+
+        <section style="padding: 60px 0;">
+            <h2 style="text-align:center; margin-bottom:30px; color:white;">Últimos Videos</h2>
+            <div id="youtube-videos" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+            </div>
         </section>
 
         <section class="signal-grid" aria-label="Estado del canal">
-          <article class="signal-card">
+          
+          <article class="signal-card" id="card-calendar">
             <span data-i18n="calendar">Calendario</span>
-            <strong>Viernes 21:00</strong>
-            <p data-i18n="calendarText">Nuevo programa programado desde YouTube Studio.</p>
+            <strong id="calendar-next-date">Cargando...</strong>
+            <p id="calendar-next-title" data-i18n="calendarText">Buscando el próximo estreno programado...</p>
           </article>
-          <article class="signal-card">
+          
+          <article class="signal-card" id="card-live">
             <span data-i18n="liveSection">En vivo</span>
-            <strong data-i18n="liveStatus">Sin transmisión activa</strong>
-            <p data-i18n="liveText">Cuando haya directo, este bloque abre el acceso principal.</p>
+            <strong id="live-status-text" data-i18n="liveStatus">Cargando señal...</strong>
+            <p id="live-status-desc" data-i18n="liveText">Verificando si hay transmisiones activas en el canal.</p>
           </article>
-          <article class="signal-card">
-            <span data-i18n="support">Fans y sponsors</span>
-            <strong>$ 2.4M ARS</strong>
-            <p data-i18n="supportText">Apoyos agrupados por programa y creador.</p>
+          
+          <article class="signal-card" id="card-community">
+            <span data-i18n="support">Comunidad activa</span>
+            <strong id="community-interaction-count">--</strong>
+            <p id="community-interaction-desc">Mensajes e interacciones en nuestros contenidos este mes.</p>
           </article>
+
+        </section>
+
+        <!-- Programas del canal (administrado desde el panel admin) -->
+        <section class="content-section" id="programas-canal-section" style="display:none;">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" style="color:var(--good);">Canal</p>
+              <h2>Nuestros programas</h2>
+            </div>
+          </div>
+          <div class="programas-canal-grid" id="programas-canal-grid"></div>
         </section>
 
         <section class="content-section">
@@ -107,20 +132,70 @@
             </div>
             <a class="small-command" href="calendario.html" data-i18n="seeSchedule">Ver agenda</a>
           </div>
+        
+          <div class="program-grid" data-program-grid style="grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 25px;">
+            
+            <a href="https://www.youtube.com/playlist?list=PLfaEntsgbWI--CqDSJrUOjAZDIKwSGapp" 
+               target="_blank" class="program-card" style="text-decoration:none;">
+              <div class="program-poster" style="height: 360px; position:relative; background:#111; border-radius:8px; overflow:hidden;">
+                <iframe width="100%" height="100%" 
+                        src="https://www.youtube.com/embed/videoseries?list=PLfaEntsgbWI--CqDSJrUOjAZDIKwSGapp" 
+                        frameborder="0" allowfullscreen style="border:none; min-height:360px;"></iframe>
+              </div>
+              <span class="program-details">
+                <strong>El Enmascarado</strong>
+                <small>Playlist completa</small>
+              </span>
+            </a>
 
-          <div class="program-grid" data-program-grid>
-            <a class="program-card" href="programa.html" data-category="uploaded" data-search="el enmascarado entrevistas creadores">
-              <span class="program-poster poster-one"></span>
-              <span class="program-details"><strong>El Enmascarado</strong><small data-i18n="uploaded">Subidos</small></span>
+            <a href="https://www.youtube.com/playlist?list=PLfaEntsgbWI9f1P1AiZHtGCunM0tLznll" 
+               target="_blank" class="program-card" style="text-decoration:none;">
+              <div class="program-poster" style="height: 360px; position:relative; background:#111; border-radius:8px; overflow:hidden;">
+                <iframe width="100%" height="100%" 
+                        src="https://www.youtube.com/embed/videoseries?list=PLfaEntsgbWI9f1P1AiZHtGCunM0tLznll" 
+                        frameborder="0" allowfullscreen style="border:none; min-height:360px;"></iframe>
+              </div>
+              <span class="program-details">
+                <strong>La Posta</strong>
+                <small>Playlist completa</small>
+              </span>
             </a>
-            <a class="program-card" href="programa.html" data-category="live" data-search="la posta vivo actualidad streaming">
-              <span class="program-poster poster-two"></span>
-              <span class="program-details"><strong>La Posta</strong><small data-i18n="live">En vivo</small></span>
-            </a>
+
           </div>
         </section>
+        
       </main>
     </div>
+
     <script src="assets/js/app.js"></script>
-  </body>
+    <script src="js/youtube.js"></script>
+    <script src="js/banners.js"></script>
+    <script src="/js/site-config.js"></script>
+    <script>
+      // Cargar y renderizar los programas del canal
+      fetch("/api/programas-canal").then(r => r.json()).then(items => {
+        if (!items.length) return;
+        const section = document.getElementById("programas-canal-section");
+        const grid    = document.getElementById("programas-canal-grid");
+        if (!section || !grid) return;
+        section.style.display = "";
+        grid.innerHTML = items.map(p => {
+          const igUrl = p.instagram
+            ? `https://instagram.com/${p.instagram.replace(/^@/, "")}`
+            : null;
+          const logoHtml = p.logoUrl
+            ? `<img class="programa-card-logo" src="${p.logoUrl.replace(/"/g,'&quot;')}" alt="${p.nombre.replace(/</g,'&lt;')}" loading="lazy" />`
+            : `<span class="programa-card-logo-placeholder">${p.nombre.charAt(0).toUpperCase()}</span>`;
+          return `<a class="programa-card"
+                     href="${igUrl ? igUrl.replace(/"/g,'&quot;') : '#'}"
+                     target="${igUrl ? '_blank' : '_self'}"
+                     rel="noopener">
+            ${logoHtml}
+            <span class="programa-card-name">${p.nombre.replace(/</g,'&lt;')}</span>
+            ${p.instagram ? `<span class="programa-card-ig">@${p.instagram.replace(/</g,'&lt;')}</span>` : ""}
+          </a>`;
+        }).join("");
+      }).catch(() => {});
+    </script>
+ </body>
 </html>

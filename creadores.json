@@ -1,0 +1,19 @@
+{
+  "galeriaproducciones@gmail.com": {
+    "playlistId": "PLfaEntsgbWI9f1P1AiZHtGCunM0tLznll",
+    "programa": "Administrador Galeria",
+    "rol": "admin"
+  },
+  "pabloabritos@gmail.com": {
+    "playlistId": "PLfaEntsgbWI--CqDSJrUOjAZDIKwSGapp",
+    "programa": "El Enmascarado",
+    "rol": "creador"
+  },
+  "estudioelmedano@gmail.com": {
+    "playlistId": "N/A",
+    "programa": "Galeria",
+    "videosCount": 4,
+    "impacto": 25,
+    "rol": "admin"
+  }
+}

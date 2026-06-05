@@ -1,0 +1,20 @@
+[
+  {
+    "id": "medano",
+    "title": "Música producida en El Médano Estudio",
+    "description": "Canciones seleccionadas de artistas que produjeron música en El Médano Estudio con diversidad de estilos.",
+    "embedUrl": "https://open.spotify.com/embed/playlist/2lvyN7OIahnsnZpLS5isod?utm_source=generator&theme=0"
+  },
+  {
+    "id": "la-posta",
+    "title": "Favoritos de La Posta",
+    "description": "Los temazos que más les gustan al team, para musicalizar tu día.",
+    "embedUrl": "https://open.spotify.com/embed/playlist/2mUsVC12jaChc8pxNayBYI?utm_source=generator"
+  },
+  {
+    "id": "825994655f59",
+    "title": "Recomendados Galería",
+    "description": "La mejor música para vos, recomendada por nuestros curadores.",
+    "embedUrl": "https://open.spotify.com/embed/playlist/78x3l8O18pMiqNsNujUys4?utm_source=generator"
+  }
+]

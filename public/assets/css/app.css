@@ -69,9 +69,9 @@ button {
 }
 
 .site-shell {
-  width: min(1440px, 100%);
+  width: min(1920px, 100%);
   margin: 0 auto;
-  padding: 18px clamp(14px, 3vw, 36px) 48px;
+  padding: 18px clamp(14px, 2.5vw, 48px) 48px;
 }
 
 .topbar,
@@ -113,13 +113,14 @@ button {
 
 .brand-mark {
   display: grid;
-  width: 96px;
-  height: 96px;
+  width: 64px;
+  height: 64px;
   place-items: center;
   padding: 5px;
   border-radius: var(--radius);
   background: #050505;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.36);
+  flex-shrink: 0;
 }
 
 .brand-mark img {
@@ -314,11 +315,23 @@ p {
 }
 
 .player-frame {
+  position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: 12px;
   background: #060713;
   box-shadow: var(--shadow);
+}
+
+/* Hero frame: 16:9, capped a 620px de alto para pantallas muy anchas */
+.home-hero-layout .player-frame {
+  aspect-ratio: 16 / 9;
+  max-height: 620px;
+}
+
+.home-hero-layout #hero-video {
+  width: 100%;
+  height: 100%;
 }
 
 .broadcast-art {
@@ -404,6 +417,33 @@ p {
   font-size: clamp(1.08rem, 2vw, 1.45rem);
 }
 
+/* Inside the hero frame: overlay at the bottom with gradient */
+.home-hero-layout .player-frame .player-meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 48px 20px 18px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.5) 55%, transparent 100%);
+  border-radius: 0 0 12px 12px;
+}
+
+.home-hero-layout .player-frame .player-meta p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 4px;
+}
+
+.home-hero-layout .player-frame .player-meta h2 {
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  line-height: 1.25;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
 .player-actions,
 .content-tabs,
 .hero-actions {
@@ -466,6 +506,236 @@ p {
 
 .content-section {
   margin-top: 34px;
+}
+
+/* ── Slot: hasta 3 banners por fila ──────────────────────────────────────── */
+.sponsor-banner-slot {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+  margin: 34px 0;
+}
+
+.sponsor-banner-slot[hidden] {
+  display: none;
+}
+
+/* ── Banner horizontal: imagen izquierda completa | texto derecha ─────────── */
+.sponsor-banner {
+  display: grid;
+  grid-template-columns: 160px 1fr; /* imagen fija, texto flexible */
+  align-items: stretch;
+  min-height: 110px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent-2);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.18s, border-left-color 0.18s;
+}
+
+.sponsor-banner:hover {
+  background: var(--surface-strong);
+  border-left-color: var(--accent);
+}
+
+/* Columna de imagen: muestra la foto COMPLETA sin recortar */
+.sponsor-banner-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.25);
+  border-right: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.sponsor-banner-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* imagen completa, sin recorte */
+  display: block;
+}
+
+/* Columna de texto */
+.sponsor-banner-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 14px 16px;
+  min-width: 0;
+}
+
+.sponsor-banner-copy small {
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-2);
+}
+
+.sponsor-banner-copy strong {
+  font-size: 0.98rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.sponsor-banner-copy span {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Espacio entre la línea del header y el contenido */
+main {
+  padding-top: 32px;
+}
+
+.home-hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Activa el layout de 2 columnas sólo cuando el banner vertical está visible */
+.home-hero-layout:has(aside:not([hidden])) {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+}
+
+.home-hero-layout .player-panel {
+  min-width: 0;
+}
+
+.home-hero-layout .sponsor-banner-slot {
+  margin: 0;
+}
+
+/* ── Banner vertical (home-vertical slot) ────────────────────────────────── */
+.sponsor-banner.is-vertical {
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: unset;
+  border-left: none;
+  border-top: none;
+  height: 100%;
+  min-height: 300px;
+}
+
+/* Imagen: 65% de la altura total del card */
+.sponsor-banner.is-vertical .sponsor-banner-media {
+  flex: 0 0 65%;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: unset;
+  border-right: none;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  background: #000;
+}
+
+.sponsor-banner.is-vertical .sponsor-banner-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Texto: 35% restante */
+.sponsor-banner.is-vertical .sponsor-banner-copy {
+  flex: 1;
+  justify-content: center;
+  padding: 12px 14px;
+  overflow: hidden;
+}
+
+.sponsor-banner.is-vertical .sponsor-banner-copy strong {
+  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sponsor-banner.is-vertical .sponsor-banner-copy span {
+  font-size: 0.8rem;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Tarjetas de programas propios del canal ─────────────────────────────── */
+.programas-canal-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.programa-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 130px;
+  padding: 16px 12px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--good);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.18s, transform 0.15s, border-top-color 0.18s;
+  text-align: center;
+}
+
+.programa-card:hover {
+  background: var(--surface-strong);
+  transform: translateY(-3px);
+  border-top-color: var(--accent-2);
+}
+
+.programa-card-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid var(--line);
+}
+
+/* Placeholder cuando no hay logo */
+.programa-card-logo-placeholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--good), var(--accent-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #000;
+  flex-shrink: 0;
+}
+
+.programa-card-name {
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.programa-card-ig {
+  font-size: 0.72rem;
+  color: var(--accent-2);
+  font-weight: 700;
 }
 
 .section-heading {
@@ -683,7 +953,29 @@ textarea {
 
 .live-room {
   grid-template-columns: minmax(0, 1fr) minmax(300px, 0.36fr);
+  align-items: start;
   padding-top: 34px;
+}
+
+/* El frame del player adopta el aspect-ratio 16:9 y sirve como bloque de posicionamiento */
+.live-player-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+/* El contenedor interior y el iframe se posicionan absolutamente para llenar el frame
+   — esto funciona siempre, incluso cuando height del padre viene de aspect-ratio */
+.live-player-frame #youtube-live {
+  position: absolute;
+  inset: 0;
+}
+
+.live-player-frame #youtube-live iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
 }
 
 .live-now {
@@ -694,9 +986,9 @@ textarea {
 }
 
 .chat-panel {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  align-content: start;
 }
 
 .chat-line {
@@ -715,6 +1007,133 @@ textarea {
   margin-top: 16px;
 }
 
+/* ── Tarjetas del calendario ─────────────────────────────────────────────── */
+.schedule-list {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.cal-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.cal-card:hover {
+  border-color: var(--accent-2);
+  transform: translateY(-2px);
+}
+
+.cal-card--live {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(246,36,125,0.12), var(--surface) 60%);
+}
+
+.cal-card--soon {
+  border-color: var(--accent-3);
+  background: linear-gradient(135deg, rgba(249,233,95,0.1), var(--surface) 60%);
+}
+
+.cal-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+
+.cal-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cal-live-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cal-info {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+}
+
+.cal-status {
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-2);
+}
+
+.cal-status--live {
+  color: var(--accent);
+}
+
+.cal-title {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.3;
+}
+
+.cal-time {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent-3);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.cal-relative {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.cal-cta {
+  font-size: 0.8rem;
+  color: var(--accent-2);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.cal-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+
+.cal-empty small {
+  display: block;
+  margin-top: 8px;
+  color: #555;
+  font-size: 0.8rem;
+}
+
+.cal-loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: var(--muted);
+}
+
+/* Legado (usado en otras páginas que aún usen .schedule-card) */
 .schedule-card {
   justify-content: space-between;
   gap: 14px;
@@ -846,6 +1265,19 @@ textarea {
 }
 
 @media (max-width: 820px) {
+  .home-hero-layout,
+  .home-hero-layout:has(aside:not([hidden])) {
+    grid-template-columns: 1fr;
+  }
+
+  .home-hero-layout .player-frame {
+    max-height: none;
+  }
+
+  .home-hero-layout aside.sponsor-banner-slot {
+    max-width: 100%;
+  }
+
   .site-shell {
     padding-inline: 12px;
   }

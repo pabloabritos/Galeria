@@ -1,0 +1,82 @@
+{
+  "pages": {
+    "vivo": {
+      "enabled": true
+    },
+    "programas": {
+      "enabled": true
+    },
+    "podcasts": {
+      "enabled": true
+    },
+    "musica": {
+      "enabled": true
+    },
+    "calendario": {
+      "enabled": true
+    },
+    "sponsors": {
+      "enabled": true
+    },
+    "sobre": {
+      "enabled": true
+    }
+  },
+  "textos": {
+    "programsTitle": "Tus programas favoritos de Galería",
+    "programsText": "Encontrá aquí las playlists de tus programas favoritos y accedé a todos sus videos.",
+    "calendarTitle": "Calendario de lanzamientos",
+    "calendarPageText": "Enterate de los nuevos videos que están por lanzarse en Galería y las próximas emisiones en vivo.",
+    "podcastsTitle": "Podcasts producidos en el universo de Galería",
+    "podcastsText": "Escuchá nuestros podcasts en Spotify.",
+    "scale": "Creatividad",
+    "scaleTitle": "Pensado para creadores",
+    "scaleText": "Creadores ingresan de manera segura con su cuenta de gmail y suben sus videos a Galería.",
+    "supportTitle": "Elegí cómo apoyar al canal o a tus programas favoritos",
+    "supportPageText": "El apoyo económico a creadores es la mejor forma de hacer sustentables sus programas. Tu ayuda es directa y sin intermediarios."
+  },
+  "textos_en": {
+    "scale": "Creativity",
+    "scaleTitle": "Built for creators",
+    "scaleText": "Creators securely log in with their gmail account and upload their videos to Gallery.",
+    "podcastsTitle": "Podcasts produced in the Gallery universe",
+    "podcastsText": "Listen to our podcasts on Spotify.",
+    "calendarTitle": "Drop Calendar",
+    "calendarPageText": "Find out about the new videos that are about to be released on Gallery and the upcoming live broadcasts."
+  },
+  "pagos": {
+    "cafecito": "galeriacanal",
+    "mercadopago": "",
+    "aliasMP": "elmedanoestudio.mp",
+    "descripcion": "Apoyá el canal directamente. Tu contribución ayuda a producir más contenido original y mejorar la plataforma de creadores."
+  },
+  "planes": [
+    {
+      "id": "fan",
+      "titulo": "Fan",
+      "precio": "$ 2.000",
+      "descripcion": "Apoyo mensual para tu programa favorito.",
+      "boton": "Apoyar",
+      "link": "",
+      "destacado": false
+    },
+    {
+      "id": "sponsor",
+      "titulo": "Sponsor",
+      "precio": "$ 120.000",
+      "descripcion": "Mención en descripción, vivo y placa de sponsor.",
+      "boton": "Contactar",
+      "link": "",
+      "destacado": true
+    },
+    {
+      "id": "productor",
+      "titulo": "Productor",
+      "precio": "$ 350.000",
+      "descripcion": "Patrocinio de playlist y reportes de rendimiento.",
+      "boton": "Reservar",
+      "link": "",
+      "destacado": false
+    }
+  ]
+}

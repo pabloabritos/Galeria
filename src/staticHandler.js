@@ -21,7 +21,12 @@ const SECURITY_HEADERS = {
 };
 
 function resolvePath(url) {
-  const clean = decodeURIComponent(url.split("?")[0]);
+  let clean;
+  try {
+    clean = decodeURIComponent(url.split("?")[0]);
+  } catch {
+    clean = url.split("?")[0];
+  }
   const requested = clean === "/" ? "/index.html" : clean;
   return path.normalize(path.join(publicDir, requested));
 }
@@ -40,10 +45,13 @@ function serveFile(res, filePath) {
   });
 }
 
+const resolvedPublicDir = path.resolve(publicDir);
+
 function handler(req, res) {
   const filePath = resolvePath(req.url);
+  const resolvedFilePath = path.resolve(filePath);
 
-  if (!filePath.startsWith(publicDir)) {
+  if (resolvedFilePath !== resolvedPublicDir && !resolvedFilePath.startsWith(resolvedPublicDir + path.sep)) {
     res.writeHead(403, { "Content-Type": "text/plain; charset=utf-8" });
     res.end("Forbidden");
     return;

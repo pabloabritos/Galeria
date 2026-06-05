@@ -1,17 +1,315 @@
 <!doctype html>
 <html lang="es">
-  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Galeria | Creadores</title><link rel="stylesheet" href="assets/css/app.css" /></head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Galeria | Creadores</title>
+    <link rel="stylesheet" href="assets/css/app.css" />
+  </head>
   <body data-theme="dark" data-page="creators">
     <div class="site-shell">
-      <header class="topbar"><a class="brand" href="index.html"><span class="brand-mark"><img src="assets/img/galeria-logo.png" alt="Galeria" /></span><span><strong>Galeria</strong><small data-i18n="brandLine">Punto de encuentro para comunicarnos</small></span></a><button class="menu-button" type="button" data-menu-toggle data-i18n="menu">Menu</button><nav class="main-nav" data-main-nav><a href="index.html" data-nav="home" data-i18n="navHome">Home</a><a href="programas.html" data-nav="programs" data-i18n="navPrograms">Programas</a><a href="vivo.html" data-nav="live" data-i18n="navLive">En vivo</a><a href="calendario.html" data-nav="calendar" data-i18n="navCalendar">Calendario</a><a href="creadores.html" data-nav="creators" data-i18n="navCreators">Creadores</a><a href="podcasts.html" data-nav="podcasts" data-i18n="navPodcasts">Podcasts</a><a href="musica.html" data-nav="music" data-i18n="navMusic">Musica</a><a href="sponsors.html" data-nav="support" data-i18n="navSupport">Sponsors</a><a href="sobre.html" data-nav="about" data-i18n="navAbout">Sobre nosotros</a></nav><div class="utility-bar"><label class="search-wrap"><span>⌕</span><input type="search" data-site-search data-i18n-placeholder="search" placeholder="Buscar programa, short o creador" /></label><button class="icon-button" type="button" data-language-toggle>ES</button><button class="icon-button" type="button" data-theme-toggle>◐</button><a class="login-button" href="creadores.html" data-i18n="login">Entrar</a></div></header>
-      <main>
+      
+      <header class="topbar">
+        <a class="brand" href="index.html">
+          <span class="brand-mark"><img src="assets/img/galeria-logo.png" alt="Galeria" /></span>
+          <span><strong>Galeria</strong><small data-i18n="brandLine">Punto de encuentro para comunicarnos</small></span>
+        </a>
+        <button class="menu-button" type="button" data-menu-toggle data-i18n="menu">Menu</button>
+        <nav class="main-nav" data-main-nav>
+          <a href="index.html" data-nav="home" data-i18n="navHome">Home</a>
+          <a href="programas.html" data-nav="programs" data-i18n="navPrograms">Programas</a>
+          <a href="vivo.html" data-nav="live" data-i18n="navLive">En vivo</a>
+          <a href="calendario.html" data-nav="calendar" data-i18n="navCalendar">Calendario</a>
+          <a href="creadores.html" data-nav="creators" data-i18n="navCreators">Creadores</a>
+          <a href="podcasts.html" data-nav="podcasts" data-i18n="navPodcasts">Podcasts</a>
+          <a href="musica.html" data-nav="music" data-i18n="navMusic">Musica</a>
+          <a href="sponsors.html" data-nav="support" data-i18n="navSupport">Sponsors</a>
+          <a href="sobre.html" data-nav="about" data-i18n="navAbout">Sobre nosotros</a>
+        </nav>
+        <div class="utility-bar">
+          <label class="search-wrap">
+            <span>⌕</span>
+            <input type="search" data-site-search data-i18n-placeholder="search" placeholder="Buscar programa, short o creador" />
+          </label>
+          <button class="icon-button" type="button" data-language-toggle>ES</button>
+          <button class="icon-button" type="button" data-theme-toggle>◐</button>
+          <a class="login-button" href="creadores.html" data-i18n="login">Entrar</a>
+        </div>
+      </header>
+
+      <main style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+        
         <section class="creator-grid">
-          <div class="page-hero compact"><p class="eyebrow" data-i18n="creatorEyebrow">Creator Studio</p><h1 data-i18n="creatorTitle">Subir, programar y medir contenido por programa.</h1><p data-i18n="creatorText">Mock funcional para el futuro login con Google, permisos por playlist y publicacion programada en YouTube.</p><button class="primary-action" type="button" data-i18n="googleLogin">Entrar con Google</button></div>
-          <form class="studio-form"><h2 data-i18n="scheduleContent">Programar contenido</h2><label><span data-i18n="titleLabel">Titulo</span><input data-i18n-placeholder="titlePlaceholder" placeholder="Nombre del video" /></label><label><span data-i18n="playlistLabel">Playlist</span><select><option>El Enmascarado</option><option>La Posta</option></select></label><label><span data-i18n="dateLabel">Fecha y hora</span><input type="datetime-local" /></label><label><span data-i18n="typeLabel">Tipo</span><select><option data-i18n="editedVideo">Video editado</option><option data-i18n="live">Directo</option><option data-i18n="shorts">Short</option></select></label><button class="primary-action" type="button" data-i18n="saveSchedule">Guardar programacion</button></form>
+          
+          <div class="page-hero compact">
+            <p class="eyebrow" data-i18n="creatorEyebrow">Creator Studio</p>
+            <h1 data-i18n="creatorTitle">Subir, programar y medir contenido por programa.</h1>
+            <p data-i18n="creatorPageText">Mock funcional para el futuro login con Google, permisos por playlist y publicacion programada en YouTube.</p>
+            
+            <a class="primary-action google-auth-btn" href="/api/auth/google" style="text-decoration: none; display: inline-block; text-align: center; margin-top: 15px;">
+              Entrar con Google
+            </a>
+          </div>
+
+          <form class="studio-form" action="/api/upload" method="POST" enctype="multipart/form-data">
+            <h2 data-i18n="scheduleContent">Programar contenido</h2>
+            
+            <label>
+              <span>Archivo de Video (.mp4)</span>
+              <input type="file" name="videoFile" accept="video/mp4" required />
+            </label>
+
+            <label>
+              <span>Miniatura Personalizada (.jpg, .png) <small style="color: #ffb703; display: inline;">(videos largos, max. 2MB)</small></span>
+              <input type="file" name="thumbnailFile" accept="image/jpeg, image/png" />
+            </label>
+
+            <label>
+              <span data-i18n="titleLabel">Titulo</span>
+              <input name="title" data-i18n-placeholder="titlePlaceholder" placeholder="Nombre del video" required />
+            </label>
+
+            <label>
+              <span>Descripción del video <small style="color:#666; font-weight:400;">(aparece bajo el video en YouTube)</small></span>
+              <textarea name="descripcion" rows="4" placeholder="Contá de qué trata este video, mencioná invitados, links relevantes, créditos...&#10;&#10;Los hashtags se agregan automáticamente al final." style="resize:vertical; min-height:90px;"></textarea>
+            </label>
+
+            <label>
+              <span data-i18n="playlistLabel">Playlist</span>
+              <select name="playlist" id="playlistSelector">
+                </select>
+            </label>
+            
+            <label>
+              <span>Visibilidad en YouTube</span>
+              <select name="privacyStatus">
+                <option value="unlisted" selected>Oculto (No listado)</option>
+                <option value="private">Privado</option>
+                <option value="public">Público</option>
+              </select>
+            </label>
+            
+            <label>
+              <span data-i18n="dateLabel">Fecha y hora</span>
+              <input type="datetime-local" name="scheduledAt" />
+            </label>
+            
+            <label>
+              <span data-i18n="typeLabel">Tipo</span>
+              <select name="type">
+                <option value="video" data-i18n="editedVideo">Video editado</option>
+                <option value="live" data-i18n="live">Directo</option>
+                <option value="shorts" data-i18n="shorts">Short</option>
+              </select>
+            </label>
+            
+            <button class="primary-action" type="submit" data-i18n="saveSchedule">Guardar programacion</button>
+          </form>
+
+          <section id="upload-result-panel" style="display:none; background:#0d0d0d; padding:22px; border-radius:8px; border:1px solid #222;">
+            <h2 style="margin-top:0; color:#fff; font-size:1.1rem;">✅ Video subido — Copys generados</h2>
+
+            <!-- Comentario en YouTube (automático) -->
+            <p style="font-size:0.8rem; color:#3ce0a5; margin:0 0 16px;">
+              ✔ Comentario promocional publicado automáticamente en el video de YouTube.
+            </p>
+
+            <!-- Instagram copy -->
+            <label style="display:flex; flex-direction:column; gap:8px; color:#aaa; font-size:0.85rem;">
+              <span style="color:#fff; font-weight:700;">📸 Instagram</span>
+              <textarea id="instagram-copy-output" rows="8" readonly style="width:100%; padding:12px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing:border-box; font-size:0.85rem; line-height:1.5;"></textarea>
+            </label>
+            <button type="button" class="primary-action" id="btn-copy-instagram" style="margin-top:10px; padding:10px 16px;">Copiar para Instagram</button>
+
+            <!-- Comunidad YouTube (manual, API no lo permite automáticamente) -->
+            <div style="margin-top:22px; padding:14px; background:#111; border:1px solid #2a2a2a; border-radius:8px;">
+              <p style="margin:0 0 10px; font-size:0.85rem; color:#aaa;">
+                <strong style="color:#ffb703;">📢 Comunidad de YouTube</strong> —
+                <span style="color:#666;">La API oficial de YouTube no permite publicar posts de Comunidad de forma automática. Copiá el texto y publicalo manualmente desde el canal.</span>
+              </p>
+              <textarea id="community-copy-output" rows="5" readonly style="width:100%; padding:12px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing:border-box; font-size:0.85rem;"></textarea>
+              <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; align-items:center;">
+                <button type="button" class="primary-action" id="btn-copy-community" style="padding:10px 16px;">Copiar para Comunidad</button>
+                <a id="btn-open-community" href="https://studio.youtube.com/channel/community" target="_blank" rel="noopener"
+                   style="display:inline-flex; align-items:center; gap:6px; padding:10px 14px; background:#222; color:#fff; border:1px solid #333; border-radius:8px; font-size:0.85rem; text-decoration:none; font-weight:700;">
+                  Abrir YouTube Studio ↗
+                </a>
+              </div>
+            </div>
+          </section>
+
         </section>
-        <section class="metric-grid wide"><span><strong>1.8M</strong><small data-i18n="monthViews">views del mes</small></span><span><strong>64%</strong><small data-i18n="averageRetention">retencion promedio</small></span><span><strong>128K</strong><small>likes</small></span><span><strong>42</strong><small data-i18n="scheduledContent">contenidos programados</small></span></section>
+
+        <section class="metric-grid wide" id="creator-metrics-panel" style="transition: opacity 0.3s ease; margin-top: 30px;">
+          <span>
+            <strong id="creator-views">--</strong>
+            <small data-i18n="monthViews">views del mes</small>
+          </span>
+          <span>
+            <strong id="creator-engagement">--</strong>
+            <small data-i18n="averageRetention">retencion promedio</small>
+          </span>
+          <span>
+            <strong id="creator-videos">--</strong>
+            <small>videos en playlist</small>
+          </span>
+          <span>
+            <strong id="creator-scheduled">0</strong>
+            <small data-i18n="scheduledContent">contenidos programados</small>
+          </span>
+        </section>
+
+        <section id="super-admin-panel" style="display: none; margin-top: 50px; border-top: 2px dashed #222; padding-top: 40px; clear: both;">
+          <h2 style="color: #ffb703; margin-bottom: 25px; font-size: 1.5rem; font-family: inherit;">⚙️ Gestión de Equipo y Permisos (Admin)</h2>
+          
+          <div style="display: flex; flex-wrap: wrap; gap: 30px; width: 100%;">
+            
+            <div style="background: #0d0d0d; padding: 25px; border-radius: 8px; flex: 1; min-width: 320px; border: 1px solid #222; box-sizing: border-box;">
+              <h3 style="margin-top:0; margin-bottom: 20px; color: #fff; font-size: 1.1rem;">Dar de alta Creador / Admin</h3>
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: #aaa;">
+                  <span>Email de Google Personal:</span>
+                  <input type="email" id="admin-new-email" placeholder="ejemplo@gmail.com" style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing: border-box;" />
+                </label>
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: #aaa;">
+                  <span>Nombre del Programa:</span>
+                  <input type="text" id="admin-new-programa" placeholder="La Posta, El Enmascarado, etc." style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing: border-box;" />
+                </label>
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: #aaa;">
+                  <span>ID Playlist de YouTube asociada:</span>
+                  <input type="text" id="admin-new-playlist" placeholder="PLfaEntsgbWI..." style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing: border-box;" />
+                </label>
+                
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: #aaa;">
+                  <span>% Impacto Canal (1-100):</span>
+                  <input type="number" id="admin-new-impacto" placeholder="25" value="25" style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing: border-box;" />
+                </label>
+
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: #aaa;">
+                  <span>Rol en la Plataforma:</span>
+                  <select id="admin-new-rol" style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing: border-box;">
+                    <option value="creador">Standard (Creador de Contenido)</option>
+                    <option value="admin">Super Admin (Acceso Total + Configuración)</option>
+                  </select>
+                </label>
+
+                <button type="button" class="primary-action" id="btn-save-creador" style="margin-top:10px; width:100%; padding: 12px; font-weight: bold; cursor: pointer;">Autorizar Integrante</button>
+              </div>
+            </div>
+
+            <div style="background: #0d0d0d; padding: 25px; border-radius: 8px; flex: 1.5; min-width: 350px; border: 1px solid #222; box-sizing: border-box;">
+              <h3 style="margin-top:0; margin-bottom: 20px; color: #fff; font-size: 1.1rem;">Usuarios con acceso actual</h3>
+              <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left;" id="table-creadores">
+                  <thead>
+                    <tr style="border-bottom: 1px solid #222; color: #666; font-size: 0.85rem;">
+                      <th style="padding: 10px 8px;">Email / Programa</th>
+                      <th style="padding: 10px 8px; text-align: center;">Videos</th>
+                      <th style="padding: 10px 8px; text-align: center;">Impacto</th>
+                      <th style="padding: 10px 8px; text-align: right;">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ── PAGOS Y PLANES ── -->
+        <section id="pagos-planes-panel" style="display:none; margin-top:50px; border-top:2px dashed #222; padding-top:40px;"></section>
+
+        <!-- ── PROGRAMAS DEL CANAL ── -->
+        <section id="programas-canal-panel" style="display:none; margin-top:50px; border-top:2px dashed #222; padding-top:40px;"></section>
+
+        <!-- ── CONTROL DE PÁGINAS ── -->
+        <section id="page-control-panel" style="display:none; margin-top:50px; border-top:2px dashed #222; padding-top:40px;"></section>
+
+        <!-- ── GESTIÓN DE PODCASTS ── -->
+        <section id="podcasts-admin-panel" style="display:none; margin-top:50px; border-top:2px dashed #222; padding-top:40px;"></section>
+
+        <!-- ── GESTIÓN DE MÚSICA ── -->
+        <section id="musica-admin-panel" style="display:none; margin-top:50px; border-top:2px dashed #222; padding-top:40px;"></section>
+
+        <!-- ── EDITOR DE TEXTOS ── -->
+        <section id="textos-admin-panel" style="display:none; margin-top:50px; border-top:2px dashed #222; padding-top:40px;"></section>
+
+        <section id="sponsor-admin-panel" style="display:none; margin-top:50px; border-top:2px dashed #222; padding-top:40px;">
+          <h2 style="color:#ffb703; margin-bottom:25px; font-size:1.5rem; font-family:inherit;">Gestión de Banners y Sponsors</h2>
+          <div style="display:flex; flex-wrap:wrap; gap:30px; width:100%;">
+            <div style="background:#0d0d0d; padding:25px; border-radius:8px; flex:1; min-width:320px; border:1px solid #222; box-sizing:border-box;">
+              <h3 style="margin-top:0; color:#fff; font-size:1.1rem;">Nuevo banner</h3>
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <input type="hidden" id="banner-id" />
+                <label style="display:flex; flex-direction:column; gap:6px; font-size:0.85rem; color:#aaa;">
+                  <span>Título</span>
+                  <input type="text" id="banner-title" placeholder="Sponsor principal de la semana" style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing:border-box;" />
+                </label>
+                <label style="display:flex; flex-direction:column; gap:6px; font-size:0.85rem; color:#aaa;">
+                  <span>Marca / Sponsor</span>
+                  <input type="text" id="banner-sponsor" placeholder="Nombre de la marca" style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing:border-box;" />
+                </label>
+                <label style="display:flex; flex-direction:column; gap:6px; font-size:0.85rem; color:#aaa;">
+                  <span>Texto breve</span>
+                  <textarea id="banner-body" rows="3" placeholder="Mensaje o beneficio del sponsor" style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing:border-box;"></textarea>
+                </label>
+                <label style="display:flex; flex-direction:column; gap:6px; font-size:0.85rem; color:#aaa;">
+                  <span>URL de imagen</span>
+                  <input type="url" id="banner-image" placeholder="https://..." style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing:border-box;" />
+                </label>
+                <label style="display:flex; flex-direction:column; gap:6px; font-size:0.85rem; color:#aaa;">
+                  <span>Link destino</span>
+                  <input type="url" id="banner-link" placeholder="https://..." style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing:border-box;" />
+                </label>
+                <label style="display:flex; flex-direction:column; gap:6px; font-size:0.85rem; color:#aaa;">
+                  <span>Ubicación</span>
+                  <select id="banner-placement" style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing:border-box;">
+                    <option value="home">Home horizontal</option>
+                    <option value="home-vertical">Home vertical premium</option>
+                    <option value="home-global">Home vertical + todas las páginas</option>
+                    <option value="channel">Nuestros programas (Home)</option>
+                    <option value="programas">Programas</option>
+                    <option value="vivo">En vivo</option>
+                    <option value="global">Todas las páginas compatibles</option>
+                  </select>
+                </label>
+                <label style="display:flex; flex-direction:column; gap:6px; font-size:0.85rem; color:#aaa;">
+                  <span>Duración contratada</span>
+                  <select id="banner-duration" style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing:border-box;">
+                    <option value="7">7 días</option>
+                    <option value="15">15 días</option>
+                    <option value="30" selected>30 días</option>
+                    <option value="90">90 días</option>
+                    <option value="365">1 año</option>
+                    <option value="0">Sin vencimiento</option>
+                  </select>
+                </label>
+                <label style="display:flex; align-items:center; gap:8px; color:#aaa; font-size:0.85rem;">
+                  <input type="checkbox" id="banner-active" checked />
+                  <span>Activo</span>
+                </label>
+                <div style="display:grid; grid-template-columns:1fr auto; gap:10px;">
+                  <button type="button" class="primary-action" id="btn-save-banner" style="width:100%; padding:12px; font-weight:bold;">Guardar banner</button>
+                  <button type="button" id="btn-reset-banner" style="padding:12px; background:#222; color:#fff; border:1px solid #333; border-radius:4px; cursor:pointer;">Nuevo</button>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:#0d0d0d; padding:25px; border-radius:8px; flex:1.5; min-width:350px; border:1px solid #222; box-sizing:border-box;">
+              <h3 style="margin-top:0; color:#fff; font-size:1.1rem;">Banners activos y cargados</h3>
+              <div id="banners-table" style="display:flex; flex-direction:column; gap:12px;"></div>
+            </div>
+          </div>
+        </section>
+
       </main>
+
     </div>
+
     <script src="assets/js/app.js"></script>
+    <script src="js/creadores.js"></script>
+    <script src="/js/admin-tools.js"></script>
+    <script src="/js/site-config.js"></script>
   </body>
 </html>

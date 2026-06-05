@@ -1,18 +1,405 @@
 <!doctype html>
 <html lang="es">
-  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Galeria | Sponsors</title><link rel="stylesheet" href="assets/css/app.css" /></head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Galeria | Sponsors</title>
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <style>
+      /* ── Página de sponsors ──────────────────────────────────────── */
+      .pagos-canal {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .pago-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 24px 16px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        text-align: center;
+      }
+
+      .pago-card-qr {
+        width: 160px;
+        height: 160px;
+        border-radius: 8px;
+        border: 4px solid var(--surface-strong);
+      }
+
+      .pago-card-label {
+        font-size: 0.75rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent-2);
+      }
+
+      .pago-card-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: var(--radius);
+        background: var(--surface-strong);
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 700;
+        border: 1px solid var(--line);
+        transition: background 0.15s;
+      }
+
+      .pago-card-link:hover { background: rgba(255,255,255,0.12); }
+
+      /* Programas con contribución */
+      .programas-apoyo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .programa-apoyo-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        overflow: hidden;
+      }
+
+      .programa-apoyo-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .programa-apoyo-logo {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 2px solid var(--line);
+      }
+
+      .programa-apoyo-logo-placeholder {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--good), var(--accent-2));
+        display: grid;
+        place-items: center;
+        font-size: 1.1rem;
+        font-weight: 900;
+        color: #000;
+        flex-shrink: 0;
+      }
+
+      .programa-apoyo-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        padding: 20px 16px;
+        text-align: center;
+      }
+
+      .programa-apoyo-body img {
+        width: 140px;
+        height: 140px;
+        border-radius: 8px;
+        border: 3px solid var(--surface-strong);
+      }
+
+      .programa-apoyo-soon {
+        padding: 20px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        text-align: center;
+      }
+
+      /* Pricing dinámico */
+      .pricing-grid-dynamic {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      .price-card-dynamic {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 24px 20px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+
+      .price-card-dynamic.featured {
+        border-color: var(--accent-3);
+        background: linear-gradient(135deg, rgba(249,233,95,0.08), var(--surface));
+      }
+
+      .price-card-dynamic span {
+        font-size: 0.75rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent-2);
+      }
+
+      .price-card-dynamic strong {
+        font-size: 1.9rem;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .price-card-dynamic p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.55;
+        flex: 1;
+        margin: 0;
+      }
+
+      .sponsors-section-title {
+        margin: 48px 0 8px;
+        font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      }
+
+      .sponsors-section-desc {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin: 0 0 4px;
+      }
+    </style>
+  </head>
   <body data-theme="dark" data-page="support">
     <div class="site-shell">
-      <header class="topbar"><a class="brand" href="index.html"><span class="brand-mark"><img src="assets/img/galeria-logo.png" alt="Galeria" /></span><span><strong>Galeria</strong><small data-i18n="brandLine">Punto de encuentro para comunicarnos</small></span></a><button class="menu-button" type="button" data-menu-toggle data-i18n="menu">Menu</button><nav class="main-nav" data-main-nav><a href="index.html" data-nav="home" data-i18n="navHome">Home</a><a href="programas.html" data-nav="programs" data-i18n="navPrograms">Programas</a><a href="vivo.html" data-nav="live" data-i18n="navLive">En vivo</a><a href="calendario.html" data-nav="calendar" data-i18n="navCalendar">Calendario</a><a href="creadores.html" data-nav="creators" data-i18n="navCreators">Creadores</a><a href="podcasts.html" data-nav="podcasts" data-i18n="navPodcasts">Podcasts</a><a href="musica.html" data-nav="music" data-i18n="navMusic">Musica</a><a href="sponsors.html" data-nav="support" data-i18n="navSupport">Sponsors</a><a href="sobre.html" data-nav="about" data-i18n="navAbout">Sobre nosotros</a></nav><div class="utility-bar"><label class="search-wrap"><span>⌕</span><input type="search" data-site-search data-i18n-placeholder="search" placeholder="Buscar programa, short o creador" /></label><button class="icon-button" type="button" data-language-toggle>ES</button><button class="icon-button" type="button" data-theme-toggle>◐</button><a class="login-button" href="creadores.html" data-i18n="login">Entrar</a></div></header>
+      <header class="topbar">
+        <a class="brand" href="index.html"><span class="brand-mark"><img src="assets/img/galeria-logo.png" alt="Galeria" /></span><span><strong>Galeria</strong><small data-i18n="brandLine">Punto de encuentro para comunicarnos</small></span></a>
+        <button class="menu-button" type="button" data-menu-toggle data-i18n="menu">Menu</button>
+        <nav class="main-nav" data-main-nav>
+          <a href="index.html" data-nav="home" data-i18n="navHome">Home</a>
+          <a href="programas.html" data-nav="programs" data-i18n="navPrograms">Programas</a>
+          <a href="vivo.html" data-nav="live" data-i18n="navLive">En vivo</a>
+          <a href="calendario.html" data-nav="calendar" data-i18n="navCalendar">Calendario</a>
+          <a href="creadores.html" data-nav="creators" data-i18n="navCreators">Creadores</a>
+          <a href="podcasts.html" data-nav="podcasts" data-i18n="navPodcasts">Podcasts</a>
+          <a href="musica.html" data-nav="music" data-i18n="navMusic">Música</a>
+          <a href="sponsors.html" data-nav="support" data-i18n="navSupport">Sponsors</a>
+          <a href="sobre.html" data-nav="about" data-i18n="navAbout">Sobre nosotros</a>
+        </nav>
+        <div class="utility-bar">
+          <label class="search-wrap"><span>⌕</span><input type="search" data-site-search placeholder="Buscar programa, short o creador" /></label>
+          <button class="icon-button" type="button" data-language-toggle>ES</button>
+          <button class="icon-button" type="button" data-theme-toggle>◐</button>
+          <a class="login-button" href="creadores.html" data-i18n="login">Entrar</a>
+        </div>
+      </header>
+
       <main>
-        <section class="page-hero compact"><p class="eyebrow" data-i18n="supportEyebrow">Fans y sponsors</p><h1 data-i18n="supportTitle">Elegir que contenido apoyar economicamente.</h1><p data-i18n="supportPageText">Planes por programa para comunidad, marcas y sponsors editoriales.</p></section>
-        <section class="pricing-grid">
-          <article class="price-card"><span>Fan</span><strong>$ 2.000</strong><p data-i18n="fanPlan">Apoyo mensual para tu programa favorito.</p><button class="primary-action" type="button" data-i18n="supportButton">Apoyar</button></article>
-          <article class="price-card featured"><span>Sponsor</span><strong>$ 120.000</strong><p data-i18n="sponsorPlan">Mencion en descripcion, vivo y placa de sponsor.</p><button class="primary-action" type="button" data-i18n="contactButton">Contactar</button></article>
-          <article class="price-card"><span>Productor</span><strong>$ 350.000</strong><p data-i18n="producerPlan">Patrocinio de playlist y reportes de rendimiento.</p><button class="primary-action" type="button" data-i18n="reserveButton">Reservar</button></article>
+        <section class="page-hero compact">
+          <p class="eyebrow" data-i18n="supportEyebrow">Fans y sponsors</p>
+          <h1 data-i18n="supportTitle">Apoyá el canal y los programas que te gustan.</h1>
+          <p data-i18n="supportPageText">Tu contribución llega directamente a quien creás el contenido. Sin intermediarios.</p>
         </section>
+
+        <!-- Apoyar el canal -->
+        <section id="section-pagos-canal" style="display:none;">
+          <h2 class="sponsors-section-title">Apoyá el canal</h2>
+          <p id="pagos-desc-txt" class="sponsors-section-desc"></p>
+          <div class="pagos-canal" id="pagos-canal-grid"></div>
+        </section>
+
+        <!-- Apoyar programas -->
+        <section id="section-programas-apoyo" style="display:none;">
+          <h2 class="sponsors-section-title">Apoyá tu programa favorito</h2>
+          <p class="sponsors-section-desc">El dinero va directamente al creador del programa, sin pasar por el canal.</p>
+          <div class="programas-apoyo-grid" id="programas-apoyo-grid"></div>
+        </section>
+
+        <!-- Planes de colaboración -->
+        <section id="section-planes">
+          <h2 class="sponsors-section-title">Planes de colaboración</h2>
+          <p class="sponsors-section-desc">Para sponsors editoriales, marcas y producciones que quieran asociarse al canal.</p>
+          <div class="pricing-grid-dynamic" id="planes-grid">
+            <!-- cargado dinámicamente -->
+          </div>
+        </section>
+
+        <section class="sponsor-banner-slot" data-banner-slot="sponsors" hidden></section>
       </main>
     </div>
+
     <script src="assets/js/app.js"></script>
+    <script src="/js/banners.js"></script>
+    <script src="/js/site-config.js"></script>
+    <script>
+      function esc(v) {
+        return String(v||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+      }
+
+      function safeHref(url) {
+        try {
+          const u = new URL(url);
+          return (u.protocol === "https:" || u.protocol === "http:") ? url : "#";
+        } catch { return "#"; }
+      }
+
+      function qrUrl(url, size=160) {
+        return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&color=ffffff&bgcolor=111111&data=` + encodeURIComponent(url);
+      }
+
+      // Delegated click handler for alias copy buttons (replaces inline onclick)
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".copy-alias-btn");
+        if (!btn) return;
+        const alias = btn.dataset.alias;
+        navigator.clipboard.writeText(alias).then(() => {
+          btn.textContent = "✓ Copiado";
+          btn.style.color = "var(--good)";
+          setTimeout(() => { btn.textContent = "Copiar"; btn.style.color = ""; }, 2000);
+        }).catch(() => {});
+      });
+
+      // Construye las tarjetas de pago de un objeto que tenga cafecito / mercadopago / aliasMP
+      // mode: "normal" (grande, para el canal) | "small" (compacto, para programas)
+      function buildPagoCards(obj, mode = "normal") {
+        const qrSize   = mode === "small" ? 110 : 150;
+        const cards    = [];
+        const fontSize = mode === "small" ? "0.68rem" : "0.75rem";
+
+        if (obj.cafecito) {
+          const url = "https://cafecito.app/" + obj.cafecito.replace(/^@/,"");
+          cards.push(`
+            <div class="pago-card" style="${mode==="small"?"padding:14px 10px;":""}" >
+              <span class="pago-card-label" style="font-size:${fontSize};">☕ Cafecito</span>
+              <img src="${esc(qrUrl(url, qrSize))}" alt="QR Cafecito"
+                   style="width:${qrSize}px;height:${qrSize}px;border-radius:6px;border:3px solid var(--surface-strong);"
+                   loading="lazy" />
+              <small style="color:var(--muted);font-size:0.72rem;">5% de comisión</small>
+              <a class="pago-card-link" href="${esc(url)}" target="_blank" rel="noopener"
+                 style="font-size:${fontSize};">Abrir Cafecito →</a>
+            </div>`);
+        }
+
+        if (obj.mercadopago) {
+          const url = safeHref(obj.mercadopago);
+          // MP no acepta QR externos — mostrar como botón directo
+          cards.push(`
+            <div class="pago-card" style="${mode==="small"?"padding:14px 10px;":""}">
+              <span class="pago-card-label" style="font-size:${fontSize};">💳 MercadoPago</span>
+              <div style="font-size:2.8rem;line-height:1;margin:8px 0;">💙</div>
+              <p style="font-size:0.78rem;color:var(--muted);margin:0;text-align:center;line-height:1.4;">
+                Tocá el botón para ir al link de pago de MercadoPago.<br>
+                <span style="color:var(--good);font-weight:700;">0% entre cuentas MP</span>
+              </p>
+              <a class="pago-card-link" href="${esc(url)}" target="_blank" rel="noopener"
+                 style="font-size:${fontSize};background:var(--accent-2);color:#000;border-color:transparent;font-weight:800;">
+                Pagar con MP →
+              </a>
+            </div>`);
+        }
+
+        if (obj.aliasMP) {
+          // El alias se copia — no se puede hacer QR compatible con el scanner de MP
+          cards.push(`
+            <div class="pago-card" style="${mode==="small"?"padding:14px 10px;":""}">
+              <span class="pago-card-label" style="font-size:${fontSize};">🏦 Transferencia directa</span>
+              <div style="font-size:2.8rem;line-height:1;margin:8px 0;">🔁</div>
+              <p style="font-size:0.78rem;color:var(--muted);margin:0;text-align:center;line-height:1.4;">
+                Copiá el alias y usalo en tu banco o billetera.<br>
+                <span style="color:var(--good);font-weight:700;">0% de comisión siempre</span>
+              </p>
+              <div style="display:flex;align-items:center;gap:6px;background:var(--surface-strong);
+                          border-radius:6px;padding:8px 12px;border:1px solid var(--line);width:100%;
+                          box-sizing:border-box;justify-content:space-between;">
+                <code style="font-size:0.85rem;color:var(--text);font-weight:700;">${esc(obj.aliasMP)}</code>
+                <button class="copy-alias-btn"
+                  data-alias="${esc(obj.aliasMP)}"
+                  style="background:none;border:none;color:var(--accent-2);cursor:pointer;
+                         font-size:0.78rem;font-weight:800;white-space:nowrap;padding:0;">
+                  Copiar
+                </button>
+              </div>
+            </div>`);
+        }
+
+        return cards.length ? cards.join("") : "";
+      }
+
+      function logoHtml(p, size=44) {
+        if (p.logoUrl) {
+          return `<img class="programa-apoyo-logo" src="${esc(p.logoUrl)}" alt="${esc(p.nombre)}" style="width:${size}px;height:${size}px;" />`;
+        }
+        return `<span class="programa-apoyo-logo-placeholder" style="width:${size}px;height:${size}px;font-size:${size*0.4}px;">${p.nombre.charAt(0).toUpperCase()}</span>`;
+      }
+
+      async function loadSponsors() {
+        const [cfgRes, progRes] = await Promise.all([
+          fetch("/api/site-config").then(r => r.json()).catch(() => ({})),
+          fetch("/api/programas-canal").then(r => r.json()).catch(() => [])
+        ]);
+
+        const pagos  = cfgRes.pagos  || {};
+        const planes = cfgRes.planes || [];
+
+        // ── Pagos del canal ─────────────────────────────────────────────
+        const pagoCards = buildPagoCards(pagos);
+        if (pagoCards) {
+          document.getElementById("section-pagos-canal").style.display = "";
+          if (pagos.descripcion) {
+            document.getElementById("pagos-desc-txt").textContent = pagos.descripcion;
+          }
+          document.getElementById("pagos-canal-grid").innerHTML = pagoCards;
+        }
+
+        // ── Programas con links de pago ──────────────────────────────────
+        if (progRes.length) {
+          document.getElementById("section-programas-apoyo").style.display = "";
+          document.getElementById("programas-apoyo-grid").innerHTML = progRes.map(p => {
+            const body = buildPagoCards(p, "small") || `<p class="programa-apoyo-soon">Próximamente</p>`;
+            return `
+              <div class="programa-apoyo-card">
+                <div class="programa-apoyo-header">
+                  ${logoHtml(p)}
+                  <div>
+                    <strong style="display:block;font-size:0.95rem;">${esc(p.nombre)}</strong>
+                    ${p.instagram ? `<small style="color:var(--accent-2);">@${esc(p.instagram)}</small>` : ""}
+                  </div>
+                </div>
+                <div class="programa-apoyo-body" style="flex-wrap:wrap;">${body}</div>
+              </div>`;
+          }).join("");
+        }
+
+        // ── Planes dinámicos ─────────────────────────────────────────────
+        if (planes.length) {
+          document.getElementById("planes-grid").innerHTML = planes.map(p => `
+            <article class="price-card-dynamic ${p.destacado ? 'featured' : ''}">
+              <span>${esc(p.titulo)}</span>
+              <strong>${esc(p.precio)}</strong>
+              <p>${esc(p.descripcion)}</p>
+              ${p.link && safeHref(p.link) !== "#"
+                ? `<a href="${esc(safeHref(p.link))}" target="_blank" rel="noopener" class="primary-action"
+                      style="text-align:center;margin-top:auto;">${esc(p.boton || 'Apoyar')}</a>`
+                : `<button class="primary-action" style="margin-top:auto;" disabled>${esc(p.boton || 'Próximamente')}</button>`
+              }
+            </article>`).join("");
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", loadSponsors);
+    </script>
   </body>
 </html>
