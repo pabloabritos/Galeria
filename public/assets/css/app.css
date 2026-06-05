@@ -1376,16 +1376,9 @@ textarea {
     max-width: 100%;
   }
 
-  /* Video semana + banner: 2 columnas bajo el player en mobile */
+  /* Video semana + banner: columna única en mobile, apilados */
+  .home-hero-layout.show-video-semana,
   .home-hero-layout.show-video-semana:has(aside:not([hidden])) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .home-hero-layout.show-video-semana:has(aside:not([hidden])) .player-panel {
-    grid-column: 1 / -1;
-  }
-
-  .home-hero-layout.show-video-semana:not(:has(aside:not([hidden]))) {
     grid-template-columns: 1fr;
   }
 
