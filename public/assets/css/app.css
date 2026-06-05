@@ -1398,11 +1398,33 @@ textarea {
     grid-row: 2;
   }
 
-  /* El banner interno no debe exceder el ancho de su contenedor */
-  .home-hero-layout.show-video-semana .sponsor-banner-slot .sponsor-banner {
+  /* Clave: el slot tiene grid propio con minmax(300px,1fr) — lo reemplazamos */
+  .home-hero-layout.show-video-semana .sponsor-banner-slot {
+    display: block;
+    margin: 0;
+  }
+
+  /* El banner ocupa todo el ancho disponible de su columna */
+  .home-hero-layout.show-video-semana .sponsor-banner-slot .sponsor-banner.is-vertical {
     width: 100%;
-    max-width: 100%;
     box-sizing: border-box;
+  }
+
+  /* Texto del copy: no desborda */
+  .home-hero-layout.show-video-semana .sponsor-banner-slot .sponsor-banner-copy small {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    font-size: 0.6rem;
+  }
+
+  .home-hero-layout.show-video-semana .sponsor-banner-slot .sponsor-banner-copy strong {
+    font-size: 0.75rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   /* Banner vertical compacto en mobile (columna angosta) */
