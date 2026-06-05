@@ -141,11 +141,11 @@
         </section>
 
         <section class="metric-grid wide" id="creator-metrics-panel" style="transition: opacity 0.3s ease; margin-top: 30px;">
-          <span>
+          <span id="creator-views-span">
             <strong id="creator-views">--</strong>
             <small data-i18n="monthViews">views del mes</small>
           </span>
-          <span>
+          <span id="creator-engagement-span">
             <strong id="creator-engagement">--</strong>
             <small data-i18n="averageRetention">retencion promedio</small>
           </span>
@@ -181,11 +181,6 @@
                 </label>
                 
                 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: #aaa;">
-                  <span>% Impacto Canal (1-100):</span>
-                  <input type="number" id="admin-new-impacto" placeholder="25" value="25" style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing: border-box;" />
-                </label>
-
-                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: #aaa;">
                   <span>Rol en la Plataforma:</span>
                   <select id="admin-new-rol" style="width:100%; padding:10px; background:#141414; border:1px solid #333; color:#fff; border-radius:4px; box-sizing: border-box;">
                     <option value="creador">Standard (Creador de Contenido)</option>
@@ -205,7 +200,7 @@
                     <tr style="border-bottom: 1px solid #222; color: #666; font-size: 0.85rem;">
                       <th style="padding: 10px 8px;">Email / Programa</th>
                       <th style="padding: 10px 8px; text-align: center;">Videos</th>
-                      <th style="padding: 10px 8px; text-align: center;">Impacto</th>
+                      <th style="padding: 10px 8px; text-align: center;">Publicar</th>
                       <th style="padding: 10px 8px; text-align: right;">Acción</th>
                     </tr>
                   </thead>

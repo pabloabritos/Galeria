@@ -7,7 +7,8 @@
   "pabloabritos@gmail.com": {
     "playlistId": "PLfaEntsgbWI--CqDSJrUOjAZDIKwSGapp",
     "programa": "El Enmascarado",
-    "rol": "creador"
+    "rol": "creador",
+    "puedePublicar": false
   },
   "estudioelmedano@gmail.com": {
     "playlistId": "N/A",

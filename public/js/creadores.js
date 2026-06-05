@@ -4,44 +4,33 @@ window._csrfToken = "";
 
 async function fetchAndRenderCreatorStats(playlistId, email, sessionData) {
     try {
-        // Pasamos el playlistId real en la URL para que el servidor le pregunte a YouTube
         const response = await fetch(`/api/home-stats?playlistId=${playlistId}`);
         if (!response.ok) throw new Error('Error al obtener métricas');
         const data = await response.json();
 
+        const viewsSpan = document.getElementById('creator-views-span');
+        const engagementSpan = document.getElementById('creator-engagement-span');
         const viewsEl = document.getElementById('creator-views');
         const engagementEl = document.getElementById('creator-engagement');
         const videosEl = document.getElementById('creator-videos');
 
-        const rol = sessionData.rol || "creador";
+        const esAdmin = sessionData.rol === "admin" || email === "galeriaproducciones@gmail.com";
 
         if (data && data.metrics) {
-            // Caso 1: Administradores (Ven el total global del canal)
-            if (rol === "admin" || email === "galeriaproducciones@gmail.com") {
+            if (esAdmin) {
+                // Admins ven el total global del canal
                 if (viewsEl) viewsEl.textContent = data.metrics.views || '0';
                 if (engagementEl) engagementEl.textContent = data.community ? data.community.interactions : '0';
                 if (videosEl) videosEl.textContent = data.metrics.videos || '0';
             } else {
-                // Caso 2: Creador personalizado (Lógica segmentada basada en impacto)
-                let viewsStr = data.metrics.views ? data.metrics.views.toString() : '0';
-                let rawViewsStr = viewsStr.replace(/[^0-9.]/g, '');
-                let rawViewsNum = parseFloat(rawViewsStr) || 0;
-                
-                if (viewsStr.includes('M')) rawViewsNum *= 1000000;
-                else if (viewsStr.includes('K')) rawViewsNum *= 1000;
-
-                let factorImpacto = parseFloat(sessionData.impacto || 25) / 100; 
-                
-                // Si YouTube devolvió cantidad real, la usamos; si no, el fallback cargado en JSON
-                let videosReales = (data.metrics.playlistVideosReal !== "null" && data.metrics.playlistVideosReal !== "undefined" && data.metrics.playlistVideosReal !== "-1")
-                    ? data.metrics.playlistVideosReal 
+                // Creadores: solo videos reales de su playlist
+                if (viewsSpan) viewsSpan.style.display = "none";
+                if (engagementSpan) engagementSpan.style.display = "none";
+                const videosReales = (data.metrics.playlistVideosReal !== "null" &&
+                                      data.metrics.playlistVideosReal !== "undefined" &&
+                                      data.metrics.playlistVideosReal !== "-1")
+                    ? data.metrics.playlistVideosReal
                     : (sessionData.videosCount || 0);
-
-                const viewsSegmentadas = Math.floor(rawViewsNum * factorImpacto);
-                const interaccionesSegmentadas = Math.floor(viewsSegmentadas * 0.045);
-
-                if (viewsEl) viewsEl.textContent = formatLocalNumber(viewsSegmentadas);
-                if (engagementEl) engagementEl.textContent = formatLocalNumber(interaccionesSegmentadas);
                 if (videosEl) videosEl.textContent = videosReales;
             }
         }
@@ -92,7 +81,6 @@ async function initAdminPanel() {
         const email = document.getElementById("admin-new-email").value;
         const programa = document.getElementById("admin-new-programa").value;
         const playlistId = document.getElementById("admin-new-playlist").value;
-        const impacto = document.getElementById("admin-new-impacto").value;
         const rol = document.getElementById("admin-new-rol").value;
 
         if(!email || !programa) return alert("Por favor ingresa al menos el Email y el Nombre de Programa.");
@@ -104,7 +92,6 @@ async function initAdminPanel() {
                 email,
                 programa,
                 playlistId: playlistId || "N/A",
-                impacto,
                 rol
             })
         });
@@ -159,7 +146,6 @@ async function renderCreadoresTable() {
                 <span style="color:#666; font-size:0.8rem;">${escapeHtml(email)}</span>
             </td>
             <td style="padding: 12px 8px; text-align:center; color:#fff;">${escapeHtml(videoCount)}</td>
-            <td style="padding: 12px 8px; text-align:center; color:#ffb703;">${playlistId !== 'N/A' ? (user.impacto || 0) + '%' : '-'}</td>
             <td style="padding: 12px 8px; text-align:center;">
                 ${user.rol !== 'admin' && !isMaster
                     ? `<button class="toggle-publicar-btn"

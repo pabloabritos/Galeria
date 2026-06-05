@@ -670,6 +670,104 @@ main {
   overflow: hidden;
 }
 
+/* ── Video de la semana — grid de 3 columnas ─────────────────────────────── */
+/* Activa la columna del medio solo cuando la tarjeta es visible */
+.home-hero-layout.show-video-semana:has(aside:not([hidden])) {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px) minmax(260px, 340px);
+}
+
+.home-hero-layout.show-video-semana:not(:has(aside:not([hidden]))) {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+}
+
+.video-semana-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.video-semana-card a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.video-semana-card .eyebrow {
+  padding: 10px 14px 0;
+  margin: 0;
+}
+
+.video-semana-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-semana-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.video-semana-card a:hover .video-semana-thumb img { opacity: 0.8; }
+
+.video-semana-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: #fff;
+  opacity: 0;
+  background: rgba(0,0,0,0.35);
+  transition: opacity 0.2s;
+}
+
+.video-semana-card a:hover .video-semana-play { opacity: 1; }
+
+.video-semana-body {
+  padding: 12px 14px 14px;
+}
+
+.video-semana-body p {
+  margin: 0 0 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.video-semana-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.video-semana-meta span {
+  font-size: 0.75rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.video-semana-meta strong {
+  font-size: 0.82rem;
+  color: var(--accent-2);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* ── Tarjetas de programas propios del canal ─────────────────────────────── */
 .programas-canal-grid {
   display: flex;
@@ -789,7 +887,7 @@ main {
 }
 
 .program-poster {
-  min-height: 190px;
+  min-height: 160px;
 }
 
 .program-poster::before,
@@ -1276,6 +1374,11 @@ textarea {
 
   .home-hero-layout aside.sponsor-banner-slot {
     max-width: 100%;
+  }
+
+  .home-hero-layout.show-video-semana,
+  .home-hero-layout.show-video-semana:has(aside:not([hidden])) {
+    grid-template-columns: 1fr;
   }
 
   .site-shell {

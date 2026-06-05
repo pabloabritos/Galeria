@@ -106,7 +106,7 @@
       .programa-apoyo-body {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
         gap: 14px;
         padding: 20px 16px;
         text-align: center;
@@ -321,16 +321,9 @@
                 Copiá el alias y usalo en tu banco o billetera.<br>
                 <span style="color:var(--good);font-weight:700;">0% de comisión siempre</span>
               </p>
-              <div style="display:flex;align-items:center;gap:6px;background:var(--surface-strong);
-                          border-radius:6px;padding:8px 12px;border:1px solid var(--line);width:100%;
-                          box-sizing:border-box;justify-content:space-between;">
-                <code style="font-size:0.85rem;color:var(--text);font-weight:700;">${esc(obj.aliasMP)}</code>
-                <button class="copy-alias-btn"
-                  data-alias="${esc(obj.aliasMP)}"
-                  style="background:none;border:none;color:var(--accent-2);cursor:pointer;
-                         font-size:0.78rem;font-weight:800;white-space:nowrap;padding:0;">
-                  Copiar
-                </button>
+              <div style="background:var(--surface-strong);border-radius:6px;padding:10px 12px;border:1px solid var(--line);width:100%;box-sizing:border-box;align-self:stretch;">
+                <code style="display:block;font-size:0.9rem;color:var(--text);font-weight:700;word-break:break-all;margin-bottom:8px;">${esc(obj.aliasMP)}</code>
+                <button class="copy-alias-btn" data-alias="${esc(obj.aliasMP)}" style="display:block;width:100%;background:none;border:1px solid var(--accent-2);color:var(--accent-2);cursor:pointer;font-size:0.78rem;font-weight:800;padding:5px 0;border-radius:4px;box-sizing:border-box;">Copiar alias</button>
               </div>
             </div>`);
         }

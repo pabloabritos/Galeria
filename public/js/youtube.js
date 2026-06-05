@@ -155,6 +155,36 @@ function renderVideos(videos) {
     `).join('');
 }
 
+async function loadVideoSemana() {
+    try {
+        const res = await fetch('/api/youtube/video-semana');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.empty || !data.videoId) return;
+
+        const card      = document.getElementById('video-semana-card');
+        const heroLayout = document.querySelector('.home-hero-layout');
+        const link      = document.getElementById('video-semana-link');
+        const thumb     = document.getElementById('video-semana-thumb');
+        const titleEl   = document.getElementById('video-semana-title');
+        const programa  = document.getElementById('video-semana-programa');
+        const views     = document.getElementById('video-semana-views');
+
+        if (!card) return;
+
+        if (link)     link.href            = `https://youtu.be/${data.videoId}`;
+        if (thumb)  { thumb.src            = data.thumbnail; thumb.alt = data.title; }
+        if (titleEl)  titleEl.textContent  = data.title;
+        if (programa) programa.textContent = data.programa;
+        if (views)    views.textContent    = `${data.views} vistas`;
+
+        card.style.display = '';
+        if (heroLayout) heroLayout.classList.add('show-video-semana');
+    } catch (e) {
+        console.error('Error cargando video de la semana:', e);
+    }
+}
+
 // CONTROLADOR DE INICIALIZACIÓN CENTRAL
 document.addEventListener('DOMContentLoaded', async () => {
     // Inyectamos dinámicamente los estilos para el parpadeo de la señal de vivo
@@ -172,7 +202,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     Promise.all([
         getLatestNormalVideo(),
         getLatestVideos(12),
-        loadHomeStats()
+        loadHomeStats(),
+        loadVideoSemana()
     ]).then(([heroVideo, allVideos]) => {
         if (heroVideo) renderHero(heroVideo);
         if (allVideos && allVideos.length > 0) {

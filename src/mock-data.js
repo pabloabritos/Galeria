@@ -124,6 +124,16 @@ const PLAYLIST_COUNTS = {
   "PLmockLaPosta0000000000000":  6
 };
 
+/** /api/youtube/video-semana */
+const VIDEO_SEMANA = {
+  videoId:     "mock_vid_1",
+  title:       "[MOCK] EL ENMASCARADO — Cap. 5 — El episodio que todo el mundo vio",
+  thumbnail:   "https://placehold.co/320x180/0d0d1a/ffb703?text=VIDEO+SEMANA",
+  views:       "3.2K",
+  programa:    "El Enmascarado",
+  publishedAt: new Date(Date.now() - 2 * 86400000).toISOString()
+};
+
 module.exports = {
   HOME_STATS,
   YOUTUBE_LIVE,
@@ -132,5 +142,6 @@ module.exports = {
   YOUTUBE_PLAYLISTS,
   YOUTUBE_LATEST,
   YOUTUBE_NORMAL,
-  PLAYLIST_COUNTS
+  PLAYLIST_COUNTS,
+  VIDEO_SEMANA
 };

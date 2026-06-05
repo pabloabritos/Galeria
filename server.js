@@ -293,7 +293,6 @@ function getPublicSession(sessionData) {
     playlistId: sessionData.playlistId,
     programa: sessionData.programa,
     videosCount: sessionData.videosCount,
-    impacto: sessionData.impacto,
     rol: sessionData.rol || "creador",
     puedePublicar: Boolean(sessionData.puedePublicar)
   };
@@ -766,20 +765,17 @@ const server = http.createServer(async (req, res) => {
     if (!requireAdmin(req, res)) return;
     readBody(req).then((body) => {
       try {
-        const { email, playlistId, programa, impacto, rol, puedePublicar } = JSON.parse(body);
+        const { email, playlistId, programa, rol, puedePublicar } = JSON.parse(body);
         if (!email || !programa) throw new Error("Datos incompletos");
         const emailNorm = email.toLowerCase().trim();
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailNorm)) throw new Error("Email inválido.");
         if (programa.trim().length > 100) throw new Error("Nombre de programa demasiado largo.");
-        const impactoNum = parseFloat(impacto || 0);
-        if (isNaN(impactoNum) || impactoNum < 0 || impactoNum > 100) throw new Error("Impacto debe ser entre 0 y 100.");
         const lista = leerCreadores();
         const nuevoRol = rol === "admin" ? "admin" : "creador";
         const entradaExistente = lista[emailNorm] || {};
         lista[emailNorm] = {
           playlistId: playlistId ? playlistId.trim().slice(0, 100) : "N/A",
           programa: programa.trim(),
-          impacto: impactoNum,
           rol: nuevoRol,
           puedePublicar: puedePublicar !== undefined ? Boolean(puedePublicar) : Boolean(entradaExistente.puedePublicar)
         };
@@ -1319,6 +1315,58 @@ const server = http.createServer(async (req, res) => {
         const result = { items: longVideos };
         cache.set("youtube:normal", result, TTL.MEDIUM);
         return jsonResponse(res, 200, result);
+      }
+
+      // ── /video-semana ──────────────────────────────────────────────────────
+      if (pathname.endsWith("/video-semana")) {
+        if (USE_MOCK) return jsonResponse(res, 200, mock.VIDEO_SEMANA);
+        const cached = cache.get("youtube:video-semana");
+        if (cached) return jsonResponse(res, 200, cached);
+
+        const sevenDaysAgo = new Date(Date.now() - 7 * 86400000).toISOString();
+        const searchData = (await axios.get("https://www.googleapis.com/youtube/v3/search", {
+          params: { ...baseParams, order: "date", type: "video", publishedAfter: sevenDaysAgo, maxResults: 10 }
+        })).data;
+
+        if (!searchData.items?.length) {
+          const empty = { empty: true };
+          cache.set("youtube:video-semana", empty, TTL.SHORT);
+          return jsonResponse(res, 200, empty);
+        }
+
+        const videoIds = searchData.items.map(i => i.id.videoId).join(",");
+        const statsData = (await axios.get("https://www.googleapis.com/youtube/v3/videos", {
+          params: { key: apiKey, part: "statistics", id: videoIds }
+        })).data;
+
+        const statsMap = {};
+        (statsData.items || []).forEach(v => { statsMap[v.id] = v.statistics; });
+
+        const topVideo = searchData.items
+          .map(item => ({ ...item, viewCount: parseInt(statsMap[item.id.videoId]?.viewCount || 0) }))
+          .sort((a, b) => b.viewCount - a.viewCount)[0];
+
+        // Intentar asociar el video a un programa por coincidencia de título
+        const creadores = leerCreadores();
+        let programa = "Galeria";
+        const titleLower = topVideo.snippet.title.toLowerCase();
+        for (const info of Object.values(creadores)) {
+          if (info.programa && titleLower.includes(info.programa.toLowerCase())) {
+            programa = info.programa;
+            break;
+          }
+        }
+
+        const semanaResult = {
+          videoId:     topVideo.id.videoId,
+          title:       topVideo.snippet.title,
+          thumbnail:   topVideo.snippet.thumbnails.medium?.url || topVideo.snippet.thumbnails.default?.url,
+          views:       formatNumber(topVideo.viewCount),
+          programa,
+          publishedAt: topVideo.snippet.publishedAt
+        };
+        cache.set("youtube:video-semana", semanaResult, TTL.MEDIUM);
+        return jsonResponse(res, 200, semanaResult);
       }
 
     } catch (error) {
