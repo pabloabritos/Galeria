@@ -26,6 +26,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     linear-gradient(115deg, rgba(246, 36, 125, 0.24), transparent 32%),
     linear-gradient(245deg, rgba(54, 209, 255, 0.2), transparent 34%),
@@ -1389,11 +1390,19 @@ textarea {
     grid-row: 1;
   }
 
-  /* min-width: 0 evita que el contenido desborde su columna 1fr */
+  /* Contener ambas columnas dentro de su 1fr */
   .home-hero-layout.show-video-semana .video-semana-card,
   .home-hero-layout.show-video-semana .sponsor-banner-slot {
     min-width: 0;
+    overflow: hidden;
     grid-row: 2;
+  }
+
+  /* El banner interno no debe exceder el ancho de su contenedor */
+  .home-hero-layout.show-video-semana .sponsor-banner-slot .sponsor-banner {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   /* Banner vertical compacto en mobile (columna angosta) */
