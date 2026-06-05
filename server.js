@@ -524,10 +524,10 @@ const server = http.createServer(async (req, res) => {
       let miniaturaMimeType = "image/jpeg";
 
       function cleanupTempVideo() {
-        if (videoTempPath) { fs.unlink(videoTempPath, () => {}); videoTempPath = null; }
+        const p = videoTempPath;
+        videoTempPath = null;
+        if (p) fs.unlink(p, () => {});
       }
-
-      req.on("close", () => { if (!res.writableEnded) cleanupTempVideo(); });
 
       busboy.on("field", (name, val) => { camposFormulario[name] = val; });
 
