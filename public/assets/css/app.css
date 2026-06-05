@@ -1378,14 +1378,22 @@ textarea {
     max-width: 100%;
   }
 
-  /* Video semana: 2 columnas iguales bajo el player, sin :has() */
+  /* Video semana: 2 columnas iguales — !important para ganarle a :has() */
   .home-hero-layout.show-video-semana {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr !important;
     align-items: start;
   }
 
   .home-hero-layout.show-video-semana .player-panel {
     grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  /* min-width: 0 evita que el contenido desborde su columna 1fr */
+  .home-hero-layout.show-video-semana .video-semana-card,
+  .home-hero-layout.show-video-semana .sponsor-banner-slot {
+    min-width: 0;
+    grid-row: 2;
   }
 
   /* Banner vertical compacto en mobile (columna angosta) */
